@@ -1,11 +1,11 @@
 <script setup>
 import TheWelcome from '../components/TheWelcome.vue'
-import Products from '../components/Products.vue';
+import ShowProducts from '../components/ShowProducts.vue';
 </script>
 
 <template>
   <main>
     <!-- <TheWelcome /> -->
-    <Products />
+    <ShowProducts />
   </main>
 </template>

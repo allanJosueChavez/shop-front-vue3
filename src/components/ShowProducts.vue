@@ -33,8 +33,8 @@ export default {
       <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
     </h3>
     <ul id="example-2">
-      <li v-for="(product, index) in products.results">
-        <img v-bind:src="assignUrlImage(index)" alt="" />
+      <li v-for="(product, index) in products">
+        <!-- <img v-bind:src="assignUrlImage(index)" alt="" /> -->
         {{ index }} - {{ product.name }}
       </li>
     </ul>
