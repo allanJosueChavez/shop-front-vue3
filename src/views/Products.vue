@@ -1,10 +1,61 @@
+
+<template>
+  <main>
+    <Example title="This is the title"/>
+    <section class="user-registration">
+      <h3>Create a new Product</h3>
+      <form @submit.prevent="updateList(this.form)">
+        <h4>Name (Required)</h4>
+        <input type="text" placeholder="e.g: cereal" v-model="form.name" />
+        <h4>Price</h4>
+        <input type="text" v-model="form.price" />
+        <h4>Category</h4>
+        <input type="text" v-model="form.category" /><br />
+        <input type="submit" value="Create" />
+      </form>
+    </section>
+    <div class="products">
+      <table>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Tags</th>
+          <th>Discount</th>
+          <th>Actions</th>
+        </tr>
+        <tr v-for="(product, index) in productsList">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>Q{{ product.price }}.00</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.tag }}</td>
+          <td>{{ product.discounts_id }}</td>
+          <td>
+            <button @click="editProduct(product)" class="button success">Edit</button>
+            <button v-on:click="deleteRecord(product)" class="button danger">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </main>
+  <!-- <ProductsTable /> -->
+</template>
 <script>
+import { RouterLink, RouterView } from 'vue-router'
 import api from "../apis/api";
+// import EditProduct from '../components/EditProduct.vue'
+import Example from '../components/Example.vue'
+import EditProduct from '../components/EditProduct.vue'
 import { useProduct } from "@/composables/useProduct.js";
 export default {
-  // components: {
-  //   HelloWorld
-  // },
+  components: {
+    Example
+  },
+  name:'products',
   setup() {
     let { fetchProducts, products, createProduct, deleteProduct } =
       useProduct();
@@ -56,8 +107,15 @@ export default {
       },
     };
   },
-
+ 
   methods: {
+      editProduct(product) {
+            console.log(product.name)
+            // this.$router.push('/products/edit', );
+            this.$router.push({ name: 'editProduct', params: {product: "cereal" }})
+            console.log(this.$route.params)
+  },
+
     // createProduct() {
     //   api
     //     .post("/products", this.form)
@@ -99,51 +157,6 @@ export default {
 };
 </script>
 
-<template>
-  <main>
-    <!-- <TheWelcome /> -->
-    <section class="user-registration">
-      <h3>Create a new Product</h3>
-      <form @submit.prevent="updateList(this.form)">
-        <h4>Name (Required)</h4>
-        <input type="text" placeholder="e.g: cereal" v-model="form.name" />
-        <h4>Price</h4>
-        <input type="text" v-model="form.price" />
-        <h4>Category</h4>
-        <input type="text" v-model="form.category" /><br />
-        <input type="submit" value="Create" />
-      </form>
-    </section>
-    <div class="products">
-      <table>
-        <tr>
-          <th>Id</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Category</th>
-          <th>Tags</th>
-          <th>Discount</th>
-          <th>Actions</th>
-        </tr>
-        <tr v-for="(product, index) in productsList">
-          <td>{{ product.id }}</td>
-          <td>{{ product.name }}</td>
-          <td>Q{{ product.price }}.00</td>
-          <td>{{ product.category }}</td>
-          <td>{{ product.tag }}</td>
-          <td>{{ product.discounts_id }}</td>
-          <td>
-            <button class="button success">Edit</button>
-            <button v-on:click="deleteRecord(product)" class="button danger">
-              Delete
-            </button>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </main>
-  <!-- <ProductsTable /> -->
-</template>
 
 <style>
 table {
@@ -160,7 +173,7 @@ th {
 }
 
 tr:nth-child(even) {
-  background-color: #373737;
+  background-color: #878787;
 }
 
 .button {

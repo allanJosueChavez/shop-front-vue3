@@ -3,6 +3,8 @@ import HomeView from '../views/HomeView.vue'
 import UserRegistration from '../views/UserRegistration.vue'
 import UserSession from '../views/UserSession.vue'
 import Products from '../views/Products.vue'
+import EditProduct from '../components/EditProduct.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -24,10 +26,18 @@ const router = createRouter({
 
     },
     {
+      path: '/products/edit',
+      name: 'editProduct',
+      component: EditProduct,
+      // props: {product}
+      props:true
+
+    },
+    {
       path: '/products/new',
       name: 'createProduct',
-      component: Products
-
+      component: Products,
+      props: true
     },
     {
       path: '/about',
