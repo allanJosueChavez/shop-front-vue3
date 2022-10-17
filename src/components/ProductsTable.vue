@@ -24,14 +24,43 @@ export default {
 };
 </script>
 
+
+<!-- <script>
+import api from "../apis/api";
+
+export default {
+  setup() {
+  },
+
+    name: 'GetFormAxios',
+    data(){
+        return{
+            products: {}
+        }
+    },
+    methods: {
+        createProduct(){
+            api.get('')
+                 .then((res) => {
+                  console.log(res);
+                  products.value = res.data;
+                    console.log('Product created successfully!')
+                     //Perform Success Action
+                 })
+                 .catch((error) => {
+                    console.log('Check if you are entering the right type of parameters')
+                    console.log('Check out if you are entering all required paremeters')
+                     // error.response.status Check status code
+                 }).finally(() => {
+                     //Perform action in always
+                 });
+        }
+  },
+};
+</script> -->
+
 <template>
-  <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
-    <h3>
-      You’ve successfully created a project with
-      <a href="https://vitejs.dev/" target="_blank" rel="noopener">Vite</a> +
-      <a href="https://vuejs.org/" target="_blank" rel="noopener">Vue 3</a>.
-    </h3>
+  <div class="products">
     <ul id="example-2">
       <li v-for="(product, index) in products">
         <!-- <img v-bind:src="assignUrlImage(index)" alt="" /> -->
